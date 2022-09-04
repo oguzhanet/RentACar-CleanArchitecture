@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Brands.Commands.CreateBrand
 {
-    public class CreateBrandCommand: IRequest<CreatedBrandDto>
+    public class CreateBrandCommand : IRequest<CreatedBrandDto>
     {
         public string Name { get; set; }
 
@@ -28,7 +28,7 @@ namespace Application.Features.Brands.Commands.CreateBrand
                 await _brandBusinessRules.BrandNameCanNotBeDuplicatedWhenInserted(request.Name);
 
                 Brand mappedBrand = _mapper.Map<Brand>(request);
-                Brand createdBrand =await _brandRepository.AddAsync(mappedBrand);
+                Brand createdBrand = await _brandRepository.AddAsync(mappedBrand);
                 CreatedBrandDto createdBrandDto = _mapper.Map<CreatedBrandDto>(createdBrand);
 
                 return createdBrandDto;
